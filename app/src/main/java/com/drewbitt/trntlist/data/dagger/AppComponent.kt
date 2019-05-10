@@ -1,4 +1,4 @@
-package com.drewbitt.trntlist.dagger
+package com.drewbitt.trntlist.data.dagger
 
 import android.content.Context
 import com.drewbitt.trntlist.DaggerApp
