@@ -5,9 +5,9 @@ abstract class TrntJsonData {
     abstract var name: String
     abstract var created: String
     abstract var private: Boolean
-    abstract var announce: MutableList<String>
+    // abstract var announce: Array<String>
     abstract var infoHash: String
-    abstract var files: Map<String, String>
+    // abstract var files: Array<FilesClass>
     /* other options include
     pieces/piece length, length, createdBy, infoHash buffer, urlList
      */

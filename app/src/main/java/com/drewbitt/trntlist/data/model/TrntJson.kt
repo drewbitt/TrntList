@@ -1,19 +1,20 @@
 package com.drewbitt.trntlist.data.model
 
+import android.annotation.SuppressLint
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+@SuppressLint("ParcelCreator")
 @Parcelize
 @Entity
-
 data class TrntJson(
-    @PrimaryKey(autoGenerate = true) override var autoId: Int,
-    override var name: String,
-    override var created: String,
-    override var private: Boolean,
-    override var announce: MutableList<String>,
-    override var infoHash: String,
-    override var files: Map<String, String>
+    @PrimaryKey(autoGenerate = true) override var autoId: Int = 0,
+    override var name: String = "",
+    override var created: String = "",
+    override var private: Boolean = true,
+    // override var announce: Array<String> = arrayOf(),
+    override var infoHash: String = ""
+    // override var files: Array<FilesClass> = arrayOf(FilesClass())
 ): TrntJsonData(), Parcelable

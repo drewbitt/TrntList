@@ -2,19 +2,20 @@ package com.drewbitt.trntlist.dagger
 
 import android.content.Context
 import com.drewbitt.trntlist.DaggerApp
-import com.drewbitt.trntlist.data.repositories.HttpRepository
+import com.drewbitt.trntlist.dagger.scopes.AppScope
+import com.drewbitt.trntlist.data.repositories.ListRepository
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 
 @AppScope
-@Component(modules = [(AndroidSupportInjectionModule::class), (AppModule::class), (InjectorsModule::class)])
+@Component(modules = [(AndroidInjectionModule::class), (AppModule::class), (InjectorsModule::class)])
 interface AppComponent : AndroidInjector<DaggerApp> {
 
     override fun inject(daggerApp: DaggerApp)
 
-    fun inject(httpRepository: HttpRepository)
+    fun inject(listRepository: ListRepository)
 
     @Component.Builder
     interface Builder {

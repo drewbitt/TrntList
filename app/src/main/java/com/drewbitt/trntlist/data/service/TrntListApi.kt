@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface TrntListApi {
 
-    @GET("")
+    @GET("files")
     fun getList(): Call<List<TrntJson>>
 }
