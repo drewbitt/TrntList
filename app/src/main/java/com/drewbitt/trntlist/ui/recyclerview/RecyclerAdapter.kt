@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.drewbitt.trntlist.R
 import com.drewbitt.trntlist.data.model.TrntJson
@@ -32,8 +33,17 @@ class RecyclerAdapter(items: List<TrntJson>? = null): RecyclerView.Adapter<Recyc
 
     class ListViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val nameView: TextView = view.findViewById(R.id.trnt_item_textView)
+        private val itemContainer: View = view.findViewById(R.id.item_container)
+        private lateinit var mainItem: TrntJson
+
+        init {
+            itemContainer.setOnClickListener {
+                Toast.makeText(view.context, mainItem.name, 2.toInt()).show()
+            }
+        }
 
         fun bind(item: TrntJson) {
+            mainItem = item
             nameView.text = item.name
         }
     }
