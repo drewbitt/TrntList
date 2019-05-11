@@ -26,7 +26,7 @@ class AppModule {
     @Provides
     @AppScope
     fun provideAppDatabaseDao(context: Context) = Room
-        .databaseBuilder(context, TrntListDatabase::class.java, "TrrntListDatabase1")
+        .databaseBuilder(context, TrntListDatabase::class.java, "TrrntListDatabase2")
         .build()
         .trntJsonDao()
 

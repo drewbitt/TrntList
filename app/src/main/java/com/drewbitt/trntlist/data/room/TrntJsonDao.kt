@@ -1,9 +1,6 @@
 package com.drewbitt.trntlist.data.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.drewbitt.trntlist.data.model.TrntJson
 
 @Dao
@@ -14,4 +11,7 @@ interface TrntJsonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTrntJson(json: TrntJson)
+
+    @Update
+    fun updateTrntJson(json: TrntJson)
 }

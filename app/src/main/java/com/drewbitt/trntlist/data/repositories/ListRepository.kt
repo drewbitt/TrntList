@@ -63,6 +63,20 @@ class ListRepository {
         }
     }
 
+    internal fun updateTrntJson(trntJson: TrntJson) {
+        val liveData = MutableLiveData<List<TrntJson>>()
+        executors.diskIO.execute {
+            try {
+                trntJsonDao.updateTrntJson(trntJson)
+                val result = trntJsonDao.getAllTrntJson()
+                executors.mainThread.execute { liveData.value =  result}
+            } catch(e: Exception) {
+                Timber.e("message[${e.message}]")
+                executors.mainThread.execute { liveData.value = null }
+            }
+        }
+    }
+
 
     private fun getListRemotely(): List<TrntJson> =
         try {
