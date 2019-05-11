@@ -22,7 +22,7 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
 
     @Inject lateinit var viewModel: ViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerAdapter
+    lateinit var viewAdapter: RecyclerAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

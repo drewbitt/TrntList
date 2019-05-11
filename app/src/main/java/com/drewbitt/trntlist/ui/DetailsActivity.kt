@@ -2,6 +2,7 @@ package com.drewbitt.trntlist.ui
 
 import android.os.Bundle
 import android.widget.EditText
+import com.drewbitt.trntlist.MainActivity
 import com.drewbitt.trntlist.R
 import com.drewbitt.trntlist.data.ViewModel
 import com.drewbitt.trntlist.data.model.TrntJson
@@ -13,8 +14,8 @@ import javax.inject.Inject
 
 class DetailsActivity: DaggerAppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: ViewModel
+    @Inject lateinit var viewModel: ViewModel
+    @Inject lateinit var mainActivity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +70,13 @@ class DetailsActivity: DaggerAppCompatActivity() {
                                     finish()
                                     startActivity<DetailsActivity>("item" to item)
                                     // now need to do a dao refresh for mainactivity as well
+                                    // mainActivity.recreate()
+                                    // mainActivity.viewAdapter.notifyDataSetChanged()
                                 }
                             }
                         }
                     }
                 }
-
             }.show()
         }
     }

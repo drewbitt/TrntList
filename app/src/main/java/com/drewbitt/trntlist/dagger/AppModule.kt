@@ -3,6 +3,7 @@ package com.drewbitt.trntlist.dagger
 import android.content.Context
 import androidx.room.Room
 import com.drewbitt.trntlist.BuildConfig
+import com.drewbitt.trntlist.MainActivity
 import com.drewbitt.trntlist.dagger.scopes.AppScope
 import com.drewbitt.trntlist.data.ViewModel
 import com.drewbitt.trntlist.data.repositories.ListRepository
@@ -56,6 +57,10 @@ class AppModule {
     @Provides
     @AppScope
     fun provideListRepository() = ListRepository()
+
+    @Provides
+    @AppScope
+    fun provideMainActivity() = MainActivity()
 
     @Provides
     @AppScope
