@@ -21,6 +21,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "trntlistApi", trntlistApi
+            buildConfigField "String", "createtrntApi", createtrntApi
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "trntlistApi", trntlistApi
+            buildConfigField "String", "createtrntApi", createtrntApi
         }
     }
 }
@@ -43,6 +51,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
     implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // Other
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
 
     testImplementation 'junit:junit:4.12'

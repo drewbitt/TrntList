@@ -1,6 +1,5 @@
 package com.drewbitt.trntlist
 
-
 import com.drewbitt.trntlist.data.dagger.AppComponent
 import com.drewbitt.trntlist.data.dagger.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -19,4 +18,5 @@ class DaggerApp : DaggerApplication() {
     companion object {
         lateinit var appComponent: AppComponent
     }
+
 }
