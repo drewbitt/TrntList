@@ -20,13 +20,26 @@ class ListRepository {
     @Inject lateinit var trntJsonDao: TrntJsonDao
     @Inject lateinit var executors: AppExecutors
 
+    private var localList: List<TrntJson>? = null
+
     internal fun getListLiveData(): MutableLiveData<List<TrntJson>> {
         val liveData = MutableLiveData<List<TrntJson>>()
 
         executors.diskIO.execute {
             try {
-                val result = getListRemotely()
-                executors.mainThread.execute { liveData.value = result }
+                val daoList = trntJsonDao.getAllTrntJson()
+                if (daoList.isEmpty()) {
+                    val result = getListRemotely()
+                    result.forEach {
+                        insertTrntJson(it)
+                    }
+                    Timber.d("Got here")
+                    executors.mainThread.execute { liveData.value = result }
+                } else {
+                    executors.mainThread.execute { liveData.value = daoList }
+                }.also {
+                    localList = daoList
+                }
             } catch (e: Exception) {
                 Timber.e("message[${e.message}]")
                 executors.mainThread.execute { liveData.value = null }
@@ -35,11 +48,21 @@ class ListRepository {
         return liveData
     }
 
-/*    private suspend fun getList() = Mutex().withLock {
-        return@withLock listCache ?: withContext(Dispatchers.IO) {
-            return@withContext getListRemotely()
+    internal fun insertTrntJson(trntJson: TrntJson) {
+        val liveData = MutableLiveData<List<TrntJson>>()
+
+        executors.diskIO.execute {
+            try {
+                trntJsonDao.insertTrntJson(trntJson)
+                val result = trntJsonDao.getAllTrntJson()
+                executors.mainThread.execute { liveData.value =  result}
+            } catch(e: Exception) {
+                Timber.e("message[${e.message}]")
+                executors.mainThread.execute { liveData.value = null }
+            }
         }
-    }*/
+    }
+
 
     private fun getListRemotely(): List<TrntJson> =
         try {
