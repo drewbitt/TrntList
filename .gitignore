@@ -15,6 +15,3 @@
 #vscode
 .settings
 .project
-
-# storing api locations
-app/src/main/res/values/apis.xml
