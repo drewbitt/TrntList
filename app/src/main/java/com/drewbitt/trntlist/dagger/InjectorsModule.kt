@@ -1,4 +1,4 @@
-package com.drewbitt.trntlist.data.dagger
+package com.drewbitt.trntlist.dagger
 
 import dagger.Module
 

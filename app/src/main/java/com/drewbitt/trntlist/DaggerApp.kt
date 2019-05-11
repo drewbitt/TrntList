@@ -1,7 +1,7 @@
 package com.drewbitt.trntlist
 
-import com.drewbitt.trntlist.data.dagger.AppComponent
-import com.drewbitt.trntlist.data.dagger.DaggerAppComponent
+import com.drewbitt.trntlist.dagger.AppComponent
+import com.drewbitt.trntlist.dagger.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
