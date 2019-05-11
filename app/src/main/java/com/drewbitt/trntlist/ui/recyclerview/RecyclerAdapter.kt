@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.drewbitt.trntlist.R
 import com.drewbitt.trntlist.data.model.TrntJson
+import com.drewbitt.trntlist.ui.DetailsActivity
+import org.jetbrains.anko.startActivity
 
 class RecyclerAdapter(items: List<TrntJson>? = null): RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
 
-    var items: List<TrntJson> = items ?: emptyList()
+    private var items: List<TrntJson> = items ?: emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -38,7 +39,7 @@ class RecyclerAdapter(items: List<TrntJson>? = null): RecyclerView.Adapter<Recyc
 
         init {
             itemContainer.setOnClickListener {
-                Toast.makeText(view.context, mainItem.name, 2.toInt()).show()
+                view.context.startActivity<DetailsActivity>("item" to mainItem)
             }
         }
 
