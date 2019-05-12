@@ -17,4 +17,4 @@ data class TrntJson(
     override var announce: List<String> = listOf(),
     override var infoHash: String = ""
     // override var files: Array<FilesClass> = arrayOf()
-): TrntJsonData(), Parcelable
+) : TrntJsonData(), Parcelable

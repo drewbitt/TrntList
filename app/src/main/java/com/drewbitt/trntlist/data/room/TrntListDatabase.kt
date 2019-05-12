@@ -7,6 +7,6 @@ import com.drewbitt.trntlist.data.model.TrntJson
 
 @Database(entities = [(TrntJson::class)], version = 1, exportSchema = false)
 @TypeConverters(GithubTypeConverters::class)
-abstract class TrntListDatabase: RoomDatabase() {
+abstract class TrntListDatabase : RoomDatabase() {
     abstract fun trntJsonDao(): TrntJsonDao
 }

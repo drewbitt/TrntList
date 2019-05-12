@@ -58,8 +58,8 @@ class ListRepository {
             try {
                 trntJsonDao.insertTrntJson(trntJson)
                 val result = trntJsonDao.getAllTrntJson()
-                executors.mainThread.execute { liveData.value =  result}
-            } catch(e: Exception) {
+                executors.mainThread.execute { liveData.value = result }
+            } catch (e: Exception) {
                 Timber.e("message[${e.message}]")
                 executors.mainThread.execute { liveData.value = null }
             }
@@ -73,15 +73,14 @@ class ListRepository {
             try {
                 trntJsonDao.updateTrntJson(trntJson)
                 val result = trntJsonDao.getAllTrntJson()
-                executors.mainThread.execute { liveData.value =  result}
-            } catch(e: Exception) {
+                executors.mainThread.execute { liveData.value = result }
+            } catch (e: Exception) {
                 Timber.e("message[${e.message}]")
                 executors.mainThread.execute { liveData.value = null }
             }
         }
         return liveData
     }
-
 
     private fun getListRemotely(): List<TrntJson> =
         try {

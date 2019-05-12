@@ -70,5 +70,4 @@ class AppModule {
     @Provides
     @AppScope
     fun provideAnalytics(context: Context) = FirebaseAnalytics.getInstance(context)
-
 }

@@ -5,7 +5,7 @@ import com.drewbitt.trntlist.data.repositories.ListRepository
 
 class ViewModel(private val listRepository: ListRepository) {
 
-    //list repository
+    // list repository
     internal fun getListLiveData() = listRepository.getListLiveData()
 
     internal fun insertTrntJson(trntJson: TrntJson) = listRepository.insertTrntJson(trntJson)

@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 
-
 class GithubTypeConverters {
 
         internal var gson = Gson()
@@ -17,7 +16,6 @@ class GithubTypeConverters {
             }
 
             val listType = object : TypeToken<List<String>>() {
-
             }.type
 
             return gson.fromJson(data, listType)

@@ -17,5 +17,4 @@ abstract class InjectorsModule {
     @ContributesAndroidInjector
     @DetailsScope
     abstract fun detailsActivity(): DetailsActivity
-
 }

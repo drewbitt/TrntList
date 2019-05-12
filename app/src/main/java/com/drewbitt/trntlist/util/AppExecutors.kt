@@ -7,7 +7,8 @@ import java.util.concurrent.Executors
 
 data class AppExecutors(
     val diskIO: Executor = Executors.newSingleThreadExecutor(),
-    val mainThread: Executor = MainThreadExecutor()) {
+    val mainThread: Executor = MainThreadExecutor()
+) {
 
     private class MainThreadExecutor : Executor {
         private val mainThreadHandler = Handler(Looper.getMainLooper())

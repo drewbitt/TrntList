@@ -23,5 +23,4 @@ interface AppComponent : AndroidInjector<DaggerApp> {
         fun context(context: Context): Builder
         fun build(): AppComponent
     }
-
 }

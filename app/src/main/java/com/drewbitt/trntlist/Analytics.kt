@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics.Param.ITEM_NAME
 
-sealed class Analytics (private val name: String, private val bundle: Bundle) {
+sealed class Analytics(private val name: String, private val bundle: Bundle) {
 
     fun log(firebaseAnalytics: FirebaseAnalytics) = firebaseAnalytics.logEvent(name, bundle)
 
@@ -15,5 +15,4 @@ sealed class Analytics (private val name: String, private val bundle: Bundle) {
             const val NETWORK_CALL = "NETWORK_CALL"
         }
     }
-
 }

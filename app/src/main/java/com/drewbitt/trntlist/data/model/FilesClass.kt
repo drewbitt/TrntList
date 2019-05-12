@@ -9,4 +9,4 @@ data class FilesClass(
     var name: String = "",
     var length: Int = 0,
     var offset: Int = 0
-): Parcelable
+) : Parcelable

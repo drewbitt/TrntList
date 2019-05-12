@@ -18,5 +18,4 @@ class DaggerApp : DaggerApplication() {
     companion object {
         lateinit var appComponent: AppComponent
     }
-
 }

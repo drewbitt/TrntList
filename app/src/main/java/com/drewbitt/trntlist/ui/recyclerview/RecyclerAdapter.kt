@@ -10,7 +10,7 @@ import com.drewbitt.trntlist.data.model.TrntJson
 import com.drewbitt.trntlist.ui.DetailsActivity
 import org.jetbrains.anko.startActivity
 
-class RecyclerAdapter(items: List<TrntJson>? = null): RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
+class RecyclerAdapter(items: List<TrntJson>? = null) : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
 
     private var items: List<TrntJson> = items ?: emptyList()
         set(value) {
@@ -32,7 +32,7 @@ class RecyclerAdapter(items: List<TrntJson>? = null): RecyclerView.Adapter<Recyc
         }
     }
 
-    class ListViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val nameView: TextView = view.findViewById(R.id.trnt_item_textView)
         private val itemContainer: View = view.findViewById(R.id.item_container)
         private lateinit var mainItem: TrntJson

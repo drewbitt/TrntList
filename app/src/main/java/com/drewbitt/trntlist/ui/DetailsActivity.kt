@@ -13,7 +13,7 @@ import org.jetbrains.anko.design.snackbar
 import uk.co.onemandan.materialtextview.MaterialTextView
 import javax.inject.Inject
 
-class DetailsActivity: DaggerAppCompatActivity() {
+class DetailsActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var viewModel: ViewModel
     @Inject lateinit var mainActivity: MainActivity
@@ -111,6 +111,4 @@ class DetailsActivity: DaggerAppCompatActivity() {
             }.show()
         }
     }
-
-
 }

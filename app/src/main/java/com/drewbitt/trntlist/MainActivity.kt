@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
         toast("Not currently implemented, data is static on server")
-        Handler().postDelayed({swipeRefreshLayout.isRefreshing = false}, 700)
+        Handler().postDelayed({ swipeRefreshLayout.isRefreshing = false }, 700)
     }
 
     @Inject lateinit var viewModel: ViewModel
