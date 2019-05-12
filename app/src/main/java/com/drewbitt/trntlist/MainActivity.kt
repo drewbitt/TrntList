@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.drewbitt.trntlist.data.ViewModel
+import com.drewbitt.trntlist.data.model.TrntJson
 import com.drewbitt.trntlist.ui.recyclerview.RecyclerAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
@@ -34,19 +35,21 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
             Timber.plant(Timber.DebugTree())
 
         viewManager = LinearLayoutManager(this)
-        viewModel.getListLiveData().observe(this, Observer {
-            viewAdapter = RecyclerAdapter(items = it)
-            recyclerView = findViewById<RecyclerView>(R.id.listRecycler).apply {
-                adapter = viewAdapter
-                layoutManager = viewManager
-            }
-            Timber.d(it.toString())
-        })
+        viewModel.getListLiveData().observe(this, Observer(this::bindResult))
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    fun bindResult(trntJsonList: List<TrntJson>) {
+        viewAdapter = RecyclerAdapter(items = trntJsonList)
+        recyclerView = findViewById<RecyclerView>(R.id.listRecycler).apply {
+            adapter = viewAdapter
+            layoutManager = viewManager
+        }
+        Timber.d(trntJsonList.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

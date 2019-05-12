@@ -48,7 +48,7 @@ class ListRepository {
         return liveData
     }
 
-    internal fun insertTrntJson(trntJson: TrntJson) {
+    internal fun insertTrntJson(trntJson: TrntJson): MutableLiveData<List<TrntJson>> {
         val liveData = MutableLiveData<List<TrntJson>>()
 
         executors.diskIO.execute {
@@ -61,9 +61,10 @@ class ListRepository {
                 executors.mainThread.execute { liveData.value = null }
             }
         }
+        return liveData
     }
 
-    internal fun updateTrntJson(trntJson: TrntJson) {
+    internal fun updateTrntJson(trntJson: TrntJson): MutableLiveData<List<TrntJson>> {
         val liveData = MutableLiveData<List<TrntJson>>()
         executors.diskIO.execute {
             try {
@@ -75,6 +76,7 @@ class ListRepository {
                 executors.mainThread.execute { liveData.value = null }
             }
         }
+        return liveData
     }
 
 

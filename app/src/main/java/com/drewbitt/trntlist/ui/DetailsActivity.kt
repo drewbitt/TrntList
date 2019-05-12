@@ -9,6 +9,7 @@ import com.drewbitt.trntlist.data.model.TrntJson
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.DaggerAppCompatActivity
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.snackbar
 import uk.co.onemandan.materialtextview.MaterialTextView
 import javax.inject.Inject
 
@@ -64,15 +65,45 @@ class DetailsActivity: DaggerAppCompatActivity() {
                             } else {
                                 newList.add(input?.text.toString())
                                 item.announce = newList.toList()
+
+                                if (announceText.contentText.isNotEmpty()) {
+                                    announceText.setContentText(
+                                        announceText.contentText.toString().plus("\n").plus(input?.text.toString()),
+                                        MaterialTextView.ANIMATE_TYPE.NONE
+                                    )
+                                } else {
+                                    announceText.setContentText(input?.text.toString(), MaterialTextView.ANIMATE_TYPE.NONE)
+                                }
+
+                                fabDetails.snackbar("Added announce to list")
                                 doAsync {
                                     viewModel.updateTrntJson(item)
+                                }
+
+                                /*doAsync {
+                                    /*viewModel.getListLiveData().removeObservers(mainActivity)
+                                    var test = viewModel.updateTrntJson(item).observeForever {
+                                        finish()
+                                        startActivity<DetailsActivity>("item" to item)
+                                        mainActivity.viewAdapter.notifyDataSetChanged()
+                                        mainActivity.recreate()
+                                        viewModel.getListLiveData().observe(mainActivity, Observer(mainActivity::bindResult))
+                                    }
+                                    //viewModel.getListLiveData().removeObservers(mainActivity)
+                                    //viewModel.getListLiveData().observe(mainActivity, Observer(mainActivity::bindResult))
+                                    //mainActivity.viewAdapter.notifyDataSetChanged()
+                                    //mainActivity.recreate()
+                                    */
+
                                     // finish and start as this activity gets everything from the intent
                                     finish()
                                     startActivity<DetailsActivity>("item" to item)
-                                    // now need to do a dao refresh for mainactivity as well
-                                    // mainActivity.recreate()
-                                    // mainActivity.viewAdapter.notifyDataSetChanged()
+
+                                    // now need to do a dao refresh for mainactivity as well. It is observing
+                                    // liveData but never getting any updates, calls to the viewadapter have also
+                                    // been unsuccessful (since no different data, duh)
                                 }
+                                */
                             }
                         }
                     }
@@ -80,4 +111,6 @@ class DetailsActivity: DaggerAppCompatActivity() {
             }.show()
         }
     }
+
+
 }

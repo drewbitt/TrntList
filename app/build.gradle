@@ -71,6 +71,7 @@ dependencies {
     // Other
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation 'org.jetbrains.anko:anko-design:0.10.8'
     implementation 'com.github.onemandan:MaterialTextView:0.0.5'
     implementation 'com.google.code.gson:gson:2.8.5'
 
