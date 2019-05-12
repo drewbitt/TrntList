@@ -52,6 +52,7 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
         }
     }
 
+    // livedata callback
     fun bindResult(trntJsonList: List<TrntJson>) {
         recyclerAdapter.items = trntJsonList
         recyclerView = findViewById<RecyclerView>(R.id.listRecycler).apply {

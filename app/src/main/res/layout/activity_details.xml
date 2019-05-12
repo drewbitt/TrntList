@@ -64,7 +64,7 @@
                                                      android:layout_marginEnd="@dimen/margin_large"
                                                      android:layout_marginRight="@dimen/margin_large"
                                                      android:layout_marginTop="@dimen/margin_large"
-        android:text="Announces:"/>
+        android:text="@string/announces"/>
 
         <uk.co.onemandan.materialtextview.MaterialTextView
                 android:id="@+id/infoHash_announces"
