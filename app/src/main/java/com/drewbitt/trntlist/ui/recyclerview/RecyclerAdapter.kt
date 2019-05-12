@@ -12,7 +12,7 @@ import org.jetbrains.anko.startActivity
 
 class RecyclerAdapter(items: List<TrntJson>? = null) : RecyclerView.Adapter<RecyclerAdapter.ListViewHolder>() {
 
-    private var items: List<TrntJson> = items ?: emptyList()
+    var items: List<TrntJson> = items ?: emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()

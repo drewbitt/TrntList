@@ -13,22 +13,22 @@ import com.drewbitt.trntlist.data.model.TrntJson
 import com.drewbitt.trntlist.ui.recyclerview.RecyclerAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
-    override fun onRefresh() {
-        toast("Not currently implemented, data is static on server")
-        Handler().postDelayed({ swipeRefreshLayout.isRefreshing = false }, 700)
-    }
 
     @Inject lateinit var viewModel: ViewModel
     private lateinit var recyclerView: RecyclerView
-    lateinit var viewAdapter: RecyclerAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
+    // moving recyclerAdapter outside of onCreate to maintain instance and only update items
+    private var recyclerAdapter = RecyclerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +45,14 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
         viewModel.getListLiveData().observe(this, Observer(this::bindResult))
 
         fab.setOnClickListener {
-            longToast("Not currently implemented - only API is wrote & a retrofit object exists. Would post files & return JSON")
+            longToast("Not currently implemented - only API is wrote & a retrofit object exists. API on posted files returns json")
         }
     }
 
     fun bindResult(trntJsonList: List<TrntJson>) {
-        viewAdapter = RecyclerAdapter(items = trntJsonList)
+        recyclerAdapter.items = trntJsonList
         recyclerView = findViewById<RecyclerView>(R.id.listRecycler).apply {
-            adapter = viewAdapter
+            adapter = recyclerAdapter
             layoutManager = viewManager
         }
         Timber.d(trntJsonList.toString())
@@ -69,8 +69,16 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_about -> {
+                alert(Appcompat,"\nProject Repo: https://gitgud.io/drewbitt/trntlist\n").show()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onRefresh() {
+        toast("Not currently implemented, data is static on server")
+        Handler().postDelayed({ swipeRefreshLayout.isRefreshing = false }, 700)
     }
 }
