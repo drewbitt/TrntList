@@ -1,5 +1,6 @@
 package com.drewbitt.trntlist.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.drewbitt.trntlist.Analytics
 import com.drewbitt.trntlist.DaggerApp
@@ -23,25 +24,22 @@ class ListRepository {
     @Inject lateinit var executors: AppExecutors
     @Inject lateinit var analytics: FirebaseAnalytics
 
-    private var localList: List<TrntJson>? = null
-
     internal fun getListLiveData(): MutableLiveData<List<TrntJson>> {
         val liveData = MutableLiveData<List<TrntJson>>()
 
         executors.diskIO.execute {
             try {
                 val daoList = trntJsonDao.getAllTrntJson()
+                Timber.d("daoList [$daoList]")
+
                 if (daoList.isEmpty()) {
                     val result = getListRemotely()
                     result.forEach {
                         insertTrntJson(it)
                     }
-                    Timber.d("Got here")
                     executors.mainThread.execute { liveData.value = result }
                 } else {
                     executors.mainThread.execute { liveData.value = daoList }
-                }.also {
-                    localList = daoList
                 }
             } catch (e: Exception) {
                 Timber.e("message[${e.message}]")
@@ -50,6 +48,8 @@ class ListRepository {
         }
         return liveData
     }
+
+    internal fun getListLiveDataDao(): LiveData<List<TrntJson>> = trntJsonDao.getAllTrntJsonLiveData()
 
     internal fun insertTrntJson(trntJson: TrntJson): MutableLiveData<List<TrntJson>> {
         val liveData = MutableLiveData<List<TrntJson>>()

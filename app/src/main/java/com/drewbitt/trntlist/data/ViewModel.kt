@@ -8,6 +8,8 @@ class ViewModel(private val listRepository: ListRepository) {
     // list repository
     internal fun getListLiveData() = listRepository.getListLiveData()
 
+    internal fun getListLiveDataDao() = listRepository.getListLiveDataDao()
+
     internal fun insertTrntJson(trntJson: TrntJson) = listRepository.insertTrntJson(trntJson)
 
     internal fun updateTrntJson(trntJson: TrntJson) = listRepository.updateTrntJson(trntJson)

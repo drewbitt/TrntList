@@ -44,6 +44,9 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
         viewManager = LinearLayoutManager(this)
         viewModel.getListLiveData().observe(this, Observer(this::bindResult))
 
+        // This works but requires networking call to already have happened
+        // viewModel.getListLiveDataDao().observe(this, Observer(this::bindResult))
+
         fab.setOnClickListener {
             longToast("Not currently implemented - only API is wrote & a retrofit object exists. API on posted files returns json")
         }
