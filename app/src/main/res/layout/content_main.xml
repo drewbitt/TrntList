@@ -26,6 +26,7 @@
                 android:paddingBottom="8dp"
                 android:clipToPadding="false"
                 tools:visibility="gone" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.drewbitt.trntlist
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
@@ -10,21 +11,24 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.drewbitt.trntlist.data.ViewModel
 import com.drewbitt.trntlist.data.model.TrntJson
 import com.drewbitt.trntlist.ui.recyclerview.RecyclerAdapter
-import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onRefresh() {
-
+        toast("Not currently implemented, data is static on server")
+        Handler().postDelayed({swipeRefreshLayout.isRefreshing = false}, 700)
     }
 
     @Inject lateinit var viewModel: ViewModel
     private lateinit var recyclerView: RecyclerView
     lateinit var viewAdapter: RecyclerAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +38,14 @@ class MainActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshList
         if (BuildConfig.DEBUG)
             Timber.plant(Timber.DebugTree())
 
+        swipeRefreshLayout = findViewById(R.id.refresh)
+        swipeRefreshLayout.setOnRefreshListener(this)
+
         viewManager = LinearLayoutManager(this)
         viewModel.getListLiveData().observe(this, Observer(this::bindResult))
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            longToast("Not currently implemented - only API is wrote & a retrofit object exists. Would post files & return JSON")
         }
     }
 
