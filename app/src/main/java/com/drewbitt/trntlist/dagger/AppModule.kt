@@ -10,6 +10,7 @@ import com.drewbitt.trntlist.data.repositories.ListRepository
 import com.drewbitt.trntlist.data.room.TrntListDatabase
 import com.drewbitt.trntlist.data.service.TrntListApi
 import com.drewbitt.trntlist.util.AppExecutors
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -65,5 +66,9 @@ class AppModule {
     @Provides
     @AppScope
     fun provideAppExecutors() = AppExecutors()
+
+    @Provides
+    @AppScope
+    fun provideAnalytics(context: Context) = FirebaseAnalytics.getInstance(context)
 
 }

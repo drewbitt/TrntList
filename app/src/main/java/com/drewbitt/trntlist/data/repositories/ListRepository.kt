@@ -1,11 +1,13 @@
 package com.drewbitt.trntlist.data.repositories
 
 import androidx.lifecycle.MutableLiveData
+import com.drewbitt.trntlist.Analytics
 import com.drewbitt.trntlist.DaggerApp
 import com.drewbitt.trntlist.data.model.TrntJson
 import com.drewbitt.trntlist.data.room.TrntJsonDao
 import com.drewbitt.trntlist.data.service.TrntListApi
 import com.drewbitt.trntlist.util.AppExecutors
+import com.google.firebase.analytics.FirebaseAnalytics
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
@@ -19,6 +21,7 @@ class ListRepository {
     @Inject lateinit var mainList: TrntListApi
     @Inject lateinit var trntJsonDao: TrntJsonDao
     @Inject lateinit var executors: AppExecutors
+    @Inject lateinit var analytics: FirebaseAnalytics
 
     private var localList: List<TrntJson>? = null
 
@@ -82,7 +85,9 @@ class ListRepository {
 
     private fun getListRemotely(): List<TrntJson> =
         try {
-            mainList.getList().execute().body()
+            mainList.getList().execute().body().also {
+                Analytics.NetworkCall("NETWORK_CALL").log(analytics)
+            }
         } catch (e: IOException) {
             null
         } ?: emptyList()
